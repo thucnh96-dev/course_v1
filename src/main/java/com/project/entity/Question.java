@@ -41,5 +41,8 @@ public class Question extends AbtractEntity{
     @ApiModelProperty(notes = "난이도 - enum (HIGH, MIDDLE, LOW)")
     private CommonConstants.Difficulty difficulty;
 
+    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+    private QuestionNormal QuestionNormal;
+
 
 }
