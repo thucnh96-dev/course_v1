@@ -31,6 +31,10 @@ public class Question extends AbtractEntity{
     @ApiModelProperty(notes = "explan")
     private String explan;
 
+    @Column(name="question_code")
+    @ApiModelProperty(notes = "questionCode")
+    private String questionCode;
+
     @Enumerated(EnumType.STRING)
     @Column(name="question_type")
     @ApiModelProperty(notes = "난이도 - enum ( ALL, OX, KNOW, OBJECTIVE, SUBJECTIVE)")

@@ -1,5 +1,6 @@
 package com.project.controller.API;
 
+import com.project.Validator.UserValidator;
 import com.project.constants.UrlConstants;
 import com.project.controller.AbtractController;
 import com.project.entity.Role;
@@ -39,11 +40,14 @@ public class APIUserController extends AbtractController {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
+    private UserValidator userValidator;
+
     @PostMapping(value = UrlConstants.URI_USER)
     @ApiOperation(value = "createUserExamQuestion", response = Object.class)
     ResponseEntity<APIResponse> createUser(@RequestBody UserFormRegister userFormRegister){
 
-        existingValidator.validate(userFormRegister,"Exam");
+        userValidator.validate(userFormRegister);
         User user = new User();
         user.setUserName(userFormRegister.getUserName());
         user.setPassWord(bCryptPasswordEncoder.encode(userFormRegister.getPassWord()));
@@ -57,5 +61,6 @@ public class APIUserController extends AbtractController {
         data.put("password",userFormRegister.getPassWord());
         data.put("phone",user.getPhone());
         return responseUtil.successResponse(data);
+
     }
 }

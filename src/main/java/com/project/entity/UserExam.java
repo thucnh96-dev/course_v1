@@ -64,6 +64,10 @@ public class UserExam extends AbtractEntity {
 	@ApiModelProperty(notes = "exam")
     private Exam exam;
 
+    @Column(name="question_code")
+    @ApiModelProperty(notes = "questionCode")
+    private String questionCode;
+
 	public boolean isCompleted() {
 		return this.completedAt != null;
 	}
