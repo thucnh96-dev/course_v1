@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.Instant;
+import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -18,16 +19,16 @@ public abstract class AbtractEntity {
     @Column(name = "CREATE_AT")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonIgnore
-    private Instant createAt;
+    private Date createAt;
 
     @Column(name = "DELETE_AT")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonIgnore
-    private Instant deleteAt;
+    private Date deleteAt;
 
     @Column(name = "UPDATE_AT")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonIgnore
-    private Instant updateAt;
+    private Date updateAt;
 
 }

@@ -51,12 +51,7 @@ public class UserExamQuestion extends AbtractEntity {
 	
 	@Column(name="correct")
 	@ApiModelProperty(notes =  "correct")
-    private boolean correct;
-	
-	@Column(name="Duration", columnDefinition = "SMALLINT")
-	@NotNull
-	@ApiModelProperty(notes =  "소요시간")
-    private int duration = 0;
+    private Boolean correct;
 
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "User_Id", referencedColumnName="id")
@@ -70,5 +65,11 @@ public class UserExamQuestion extends AbtractEntity {
     @JoinColumn(name = "exam_question_id", referencedColumnName="id")
 	@ApiModelProperty(notes = "examQuestion")
     private ExamQuestion examQuestion;
+
+    @OneToOne( mappedBy = "userExamQuestion",fetch = FetchType.LAZY)
+    @ApiModelProperty(notes = "examQuestionNormalAnswer")
+    private UserExamQuestionNormalAnswer examQuestionNormalAnswer;
+
+
 
 }

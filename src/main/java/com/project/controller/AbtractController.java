@@ -1,9 +1,11 @@
 package com.project.controller;
 
+import com.project.Validator.ExistingValidator;
 import com.project.entity.User;
 import com.project.response.ResponseUtil;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -17,6 +19,11 @@ public abstract class AbtractController {
 
     @Autowired
     private UserService userService;
+
+
+    @Autowired
+    @Qualifier("existingValidator")
+    protected ExistingValidator existingValidator;
 
     protected User realUser(Principal principal){
         User user = userService.findByUserName(principal.getName());
