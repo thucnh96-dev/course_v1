@@ -16,6 +16,11 @@ public class UserExamServiceImpl implements UserExamService{
     private UserExamRepository userExamRepository;
 
     @Override
+    public UserExam findById(Long id) {
+        return userExamRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public UserExam save(UserExam userExam) {
         return userExamRepository.save(userExam);
     }

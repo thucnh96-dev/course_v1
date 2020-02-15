@@ -16,4 +16,5 @@ public interface UserService {
     Page<User> findAll(Specification<User> specification, Pageable pageable);
 
     User findByUserName(String userName);
+    User findById(Long id);
 }

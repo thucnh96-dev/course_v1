@@ -3,6 +3,7 @@ package com.project.controller.API;
 import com.project.constants.UrlConstants;
 import com.project.controller.AbtractController;
 import com.project.entity.ExamQuestion;
+import com.project.entity.UserExam;
 import com.project.entity.UserExamQuestion;
 import com.project.entity.UserExamQuestionNormalAnswer;
 import com.project.form.UserExamQuestionNormalAnswerForm;
@@ -10,6 +11,7 @@ import com.project.response.APIResponse;
 import com.project.service.ExamQuestionService;
 import com.project.service.UserExamQuestionNormalAnswerService;
 import com.project.service.UserExamQuestionService;
+import com.project.service.UserExamService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class APIUserExamQuestionController extends AbtractController {
     @Autowired
     private UserExamQuestionNormalAnswerService userExamQuestionNormalAnswerService;
 
+    @Autowired
+    private UserExamService userExamService;
+
     @PostMapping(value = UrlConstants.URI_USER_EXAM_QUESTION)
     @ApiOperation(value = "createUserExamQuestion", response = Object.class)
     ResponseEntity<APIResponse> createUserExamQuestion(@RequestBody UserExamQuestionNormalAnswerForm questionNormalAnswerForm , Principal principal){
@@ -43,8 +48,11 @@ public class APIUserExamQuestionController extends AbtractController {
         ExamQuestion ob = examQuestionService.findById(questionNormalAnswerForm.getExamQuestionId());
         existingValidator.validateNullOrEmpty(ob,"ExamQuestion");
 
-        UserExamQuestion userExamQuestion = new UserExamQuestion();
+        UserExam userExam = userExamService.findById(questionNormalAnswerForm.getUserExamId());
+        existingValidator.validateNullOrEmpty(userExam,"UserExam");
 
+        UserExamQuestion userExamQuestion = new UserExamQuestion();
+        userExamQuestion.setUserExam(userExam);
         userExamQuestion.setUser(this.realUser(principal));
         userExamQuestion.setAnswered(true);
         userExamQuestion.setExamQuestion(ob);

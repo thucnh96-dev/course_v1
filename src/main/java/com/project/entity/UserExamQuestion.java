@@ -11,24 +11,10 @@ package com.project.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
-
-/**
- * 회원의 학습과정 시험문항 엔티티
- * Answered : 응답여부 - 20181110 추가 (Correct 필드에 null 입력 불가하여 별도의 응답여부 항목 필요)
- * Correct : 정답여부 - '틀린 문제만 보기' 쿼리 대응
- * Duration : 문항에 제한시간 있을 경우 회원의 소요시간 저장
- * Review : 복습 횟수 - 20181217 추가 (오답노트에서 복습 횟수 표시)
- * Wrong_Count : 오답 횟수 - 20181218 추가 (오답노트에서 다시 풀기 옵션)
- * @version 0.0.1 05 Oct 2018
- * @author EnjoyWorks
- */
 @Entity
 @Table(name="TB_USER_EXAM_QUESTION")
 @AllArgsConstructor
