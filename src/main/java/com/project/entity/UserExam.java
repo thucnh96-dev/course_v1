@@ -31,7 +31,7 @@ import java.util.Date;
 public class UserExam extends AbtractEntity {
 	
 	@Id
-	@Column(name="id", columnDefinition = "INTEGER")
+	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes = "ID")
     private Long id;

@@ -31,7 +31,7 @@ import javax.validation.constraints.Size;
 public class UserExamQuestionNormalAnswer extends AbtractEntity{
 	
 	@Id
-    @Column(name="id", columnDefinition = "INTEGER")
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(notes = "ID")
     private Long id;
@@ -42,7 +42,7 @@ public class UserExamQuestionNormalAnswer extends AbtractEntity{
     private String userAnswer;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_exam_question_id", columnDefinition = "INTEGER", referencedColumnName="id")
+	@JoinColumn(name = "user_exam_question_id")
 	@MapsId
 	@ApiModelProperty(notes = "userExamQuestion")
     private UserExamQuestion userExamQuestion;

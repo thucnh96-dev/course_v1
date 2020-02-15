@@ -35,7 +35,7 @@ import javax.validation.constraints.NotNull;
 public class ExamQuestion extends AbtractEntity {
 	
 	@Id
-	@Column(name="Id", columnDefinition = "INTEGER")
+	@Column(name="Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes = "관계 ID")
     private Long id;

@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class QuestionNormal extends AbtractEntity{
 
     @Id
-    @Column(name="id", columnDefinition = "INTEGER")
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(notes = "ID")
     private Long id;
