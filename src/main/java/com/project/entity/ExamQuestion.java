@@ -40,6 +40,9 @@ public class ExamQuestion extends AbtractEntity {
 	@ApiModelProperty(notes = "관계 ID")
     private Long id;
 
+    @Column(name="code")
+	private String code;
+
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_id", referencedColumnName="id")
 	@JsonIgnore
