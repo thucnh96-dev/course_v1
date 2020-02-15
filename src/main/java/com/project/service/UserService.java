@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.List;
 
 public interface UserService {
+    User save(User user);
 
     List<User> findByNameIsLike(String name);
 

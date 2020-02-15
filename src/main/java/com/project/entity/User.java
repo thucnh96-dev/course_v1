@@ -25,10 +25,10 @@ public class User extends AbtractEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "phone")
+    @Column(name = "phone",unique = true)
     private String phone;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String userName;
 
     @Column(name = "password")
@@ -50,6 +50,12 @@ public class User extends AbtractEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id",nullable = false) }
     )
     private List<Role> roles =new ArrayList<>();
+
+    public void addRole(Role r){
+        if (r != null){
+            roles.add(r);
+        }
+    }
 
     public void setExpiryTokenDate(Date expiryTokenDate) {
         this.expiryTokenDate = expiryTokenDate;
