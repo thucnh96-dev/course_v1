@@ -13,7 +13,6 @@ import com.project.service.UserExamQuestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,6 @@ import java.security.Principal;
 @RequestMapping(value= UrlConstants.URI_API)
 @Api(value = "APIUserExamQuestionController", description = "APIUserExamQuestionController")
 public class APIUserExamQuestionController extends AbtractController {
-
 
     @Autowired
     private ExamQuestionService examQuestionService;

@@ -14,4 +14,8 @@ public class UrlConstants {
 
     public final static String URI_EXAM ="/exam";
 
+    public final static String URI_USER ="/user";
+
+    public final static String URI_HOME ="/home";
+
 }
