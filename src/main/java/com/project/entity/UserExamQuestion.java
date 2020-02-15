@@ -66,6 +66,11 @@ public class UserExamQuestion extends AbtractEntity {
 	@ApiModelProperty(notes = "examQuestion")
     private ExamQuestion examQuestion;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_exam_id", referencedColumnName="id")
+    @ApiModelProperty(notes = "userExam")
+    private UserExam userExam;
+
     @OneToOne( mappedBy = "userExamQuestion",fetch = FetchType.LAZY)
     @ApiModelProperty(notes = "examQuestionNormalAnswer")
     private UserExamQuestionNormalAnswer examQuestionNormalAnswer;
