@@ -1,6 +1,5 @@
 package com.project.controller.API;
 
-import com.project.Validator.ExistingValidator;
 import com.project.constants.UrlConstants;
 import com.project.controller.AbtractController;
 import com.project.entity.ExamQuestion;
@@ -11,7 +10,8 @@ import com.project.response.APIResponse;
 import com.project.service.ExamQuestionService;
 import com.project.service.UserExamQuestionNormalAnswerService;
 import com.project.service.UserExamQuestionService;
-import com.project.service.UserExamService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +24,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping(value= UrlConstants.URI_API)
+@Api(value = "APIUserExamQuestionController", description = "APIUserExamQuestionController")
 public class APIUserExamQuestionController extends AbtractController {
 
 
@@ -38,6 +39,7 @@ public class APIUserExamQuestionController extends AbtractController {
     private UserExamQuestionNormalAnswerService userExamQuestionNormalAnswerService;
 
     @PostMapping(value = UrlConstants.URI_USER_EXAM_QUESTION)
+    @ApiOperation(value = "createUserExamQuestion", response = Object.class)
     ResponseEntity<APIResponse> createUserExamQuestion(@RequestBody UserExamQuestionNormalAnswerForm questionNormalAnswerForm , Principal principal){
 
         ExamQuestion ob = examQuestionService.findById(questionNormalAnswerForm.getExamQuestionId());

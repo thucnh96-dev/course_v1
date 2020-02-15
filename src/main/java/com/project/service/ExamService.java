@@ -9,11 +9,16 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.List;
 
 public interface ExamService {
+
     Exam findbyId(Long id);
+
+    Exam findByName(String name);
 
     List<Exam> findAllByUserAndDeleteAtIsNull(User user);
 
     Exam findByIdAndDeleteAtIsNull(Long id);
 
     Page<Exam> findAll(Specification<Exam> spec , Pageable pageable);
+
+    Exam save(Exam exam);
 }

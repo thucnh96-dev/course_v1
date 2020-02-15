@@ -13,6 +13,8 @@ import com.project.service.ExamQuestionService;
 import com.project.service.ExamService;
 import com.project.service.QuestionNormalService;
 import com.project.service.QuestionService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value= UrlConstants.URI_API)
+@Api(value = "APIQuestionController", description = "APIQuestionController")
 public class APIQuestionController extends AbtractController {
 
     @Autowired
@@ -38,6 +41,7 @@ public class APIQuestionController extends AbtractController {
     private QuestionNormalService questionNormalService;
 
     @PostMapping(value = UrlConstants.URI_QUESTION)
+    @ApiOperation(value = "createQuestion", response = Object.class)
     ResponseEntity<APIResponse> createQuestion(@RequestBody QuestionForm questionForm, Principal principal) {
 
 
@@ -101,6 +105,7 @@ public class APIQuestionController extends AbtractController {
     }
 
     @PostMapping(value = UrlConstants.URI_QUESTION + UrlConstants.URI_EXAM_ID)
+    @ApiOperation(value = "createQuestionList", response = Object.class)
     ResponseEntity<APIResponse> createQuestionList(@PathVariable("examId") Long examId,
                                                    @RequestBody List<QuestionForm> questionForms, Principal principal) {
         Exam  exam = examService.findbyId(examId);
@@ -156,7 +161,6 @@ public class APIQuestionController extends AbtractController {
             examQuestion.setQuestion(question);
             examQuestion.setCreateAt(new Date());
             examQuestion = examQuestionService.save(examQuestion);
-
         }
 
         return responseUtil.successResponse("OKE");

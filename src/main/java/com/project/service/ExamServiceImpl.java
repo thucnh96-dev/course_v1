@@ -23,6 +23,11 @@ public class ExamServiceImpl implements ExamService{
     }
 
     @Override
+    public Exam findByName(String name) {
+        return examRepository.findByTitleIsAndDeleteAtIsNull(name);
+    }
+
+    @Override
     public List<Exam> findAllByUserAndDeleteAtIsNull(User user) {
         return examRepository.findAllByUserAndDeleteAtIsNull(user);
     }
@@ -35,5 +40,10 @@ public class ExamServiceImpl implements ExamService{
     @Override
     public Page<Exam> findAll(Specification<Exam> spec, Pageable pageable) {
         return examRepository.findAll(spec,pageable);
+    }
+
+    @Override
+    public Exam save(Exam exam) {
+        return examRepository.save(exam);
     }
 }

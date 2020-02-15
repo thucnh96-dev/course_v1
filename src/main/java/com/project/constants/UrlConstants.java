@@ -12,4 +12,6 @@ public class UrlConstants {
 
     public final static String URI_QUESTION ="/question";
 
+    public final static String URI_EXAM ="/exam";
+
 }

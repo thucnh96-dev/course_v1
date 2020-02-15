@@ -12,4 +12,5 @@ import java.util.List;
 public interface ExamRepository extends JpaRepository<Exam,Long>, JpaSpecificationExecutor<Exam> {
     List<Exam> findAllByUserAndDeleteAtIsNull(User user);
     Exam findByIdAndDeleteAtIsNull(Long id);
+    Exam findByTitleIsAndDeleteAtIsNull(String title);
 }

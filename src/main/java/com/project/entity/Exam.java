@@ -38,7 +38,7 @@ public class Exam extends AbtractEntity {
 	@ApiModelProperty(notes = "ID")
     private Long id;
 	
-	@Column(name="Title")
+	@Column(name="Title",unique = true)
 	@NotNull
 	@Size(min=1, max=255)
 	@ApiModelProperty(notes = "title")
