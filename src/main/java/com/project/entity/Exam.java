@@ -36,7 +36,7 @@ public class Exam extends AbtractEntity {
 	@Column(name="id", columnDefinition = "SMALLINT")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes = "ID")
-    private int id;
+    private Long id;
 	
 	@Column(name="Title")
 	@NotNull

@@ -19,7 +19,7 @@ public class Question extends AbtractEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @ApiModelProperty(notes = "id")
-    private long id;
+    private Long id;
 
     @Column(name="question")
     @Size(max=700)
