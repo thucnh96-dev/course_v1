@@ -121,9 +121,7 @@ public class APIQuestionController extends AbtractController {
             if (CommonConstants.Difficulty.ALL.toString().equals(questionForm.getDifficulty())){
                 question.setDifficulty(CommonConstants.Difficulty.ALL);
             }
-            if (CommonConstants.Difficulty.HIGH.toString().equals(questionForm.getDifficulty())){
-                question.setDifficulty(CommonConstants.Difficulty.HIGH);
-            }
+
             if (CommonConstants.Difficulty.MIDDLE.toString().equals(questionForm.getDifficulty())){
                 question.setDifficulty(CommonConstants.Difficulty.MIDDLE);
             }

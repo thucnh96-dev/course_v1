@@ -65,7 +65,7 @@ public class Exam extends AbtractEntity {
 
 	@Column(name="exam_cutoff_time", columnDefinition = "SMALLINT")
 	@ApiModelProperty(notes = "examCutoffTime")
-    private boolean examCutoffTime ;
+    private Boolean examCutoffTime ;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName="id")

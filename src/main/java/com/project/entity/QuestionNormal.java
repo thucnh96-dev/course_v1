@@ -16,9 +16,9 @@ import javax.persistence.*;
 public class QuestionNormal extends AbtractEntity{
 
     @Id
-    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(notes = "ID")
+    @Column(name = "id")
+    @ApiModelProperty(notes = "id")
     private Long id;
 
     @Column(name="answer1")
@@ -39,10 +39,10 @@ public class QuestionNormal extends AbtractEntity{
     @ApiModelProperty(notes = "난이도 - enum ( answer1, answer2, answer3, answer4)")
     private CommonConstants.QuestionNormalCorect answerCorect;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
-    @MapsId
+    @OneToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "question_id",nullable = false)
     @ApiModelProperty(notes = "question")
     private Question question;
+
 
 }
