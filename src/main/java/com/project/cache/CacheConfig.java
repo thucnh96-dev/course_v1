@@ -17,7 +17,7 @@ public class CacheConfig {
     @Bean
     public CacheManager ejwCacheManager() {
         cacheManager = create();
-        cacheManager.getConfiguration().setMaxBytesLocalHeap("16m");
+        cacheManager.getConfiguration().setMaxBytesLocalHeap("16m"); // size from xml
 
         EhCacheCacheManager ehCacheCacheManager = new EhCacheCacheManager();
         ehCacheCacheManager.setCacheManager(cacheManager);

@@ -11,6 +11,7 @@ import com.project.response.APIResponse;
 import com.project.security.SecurityService;
 import com.project.service.RoleService;
 import com.project.service.UserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = UrlConstants.URI_API)
+@Api(value = "APIUserController", description = "API User Controller")
 public class APIUserController extends AbtractController {
 
     @Autowired
@@ -44,7 +46,7 @@ public class APIUserController extends AbtractController {
     private UserValidator userValidator;
 
     @PostMapping(value = UrlConstants.URI_USER)
-    @ApiOperation(value = "createUserExamQuestion", response = Object.class)
+    @ApiOperation(value = "Create User Question", response = Object.class)
     ResponseEntity<APIResponse> createUser(@RequestBody UserFormRegister userFormRegister){
 
         userValidator.validate(userFormRegister);
