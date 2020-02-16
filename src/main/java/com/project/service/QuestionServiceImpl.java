@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuestionServiceImpl implements QuestionService{
 
@@ -17,6 +19,11 @@ public class QuestionServiceImpl implements QuestionService{
     @Override
     public Question save(Question question) {
         return questionRepository.save(question);
+    }
+
+    @Override
+    public List<Question> save(List<Question> question) {
+        return questionRepository.saveAll(question);
     }
 
     @Override

@@ -17,4 +17,9 @@ public class QuestionForm {
     private String explan;
     private String difficulty;
 
+    private Boolean autoGen;
+    private Integer numbers;
+
+    private Integer number;
+
 }

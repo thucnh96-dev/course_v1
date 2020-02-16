@@ -1,5 +1,6 @@
 package com.project.controller.API;
 
+import com.project.Validator.Questionvalidator;
 import com.project.constants.CommonConstants;
 import com.project.constants.UrlConstants;
 import com.project.controller.AbtractController;
@@ -13,13 +14,16 @@ import com.project.service.ExamQuestionService;
 import com.project.service.ExamService;
 import com.project.service.QuestionNormalService;
 import com.project.service.QuestionService;
+import com.project.utils.Common;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,10 +44,15 @@ public class APIQuestionController extends AbtractController {
     @Autowired
     private QuestionNormalService questionNormalService;
 
+    @Autowired
+    @Qualifier("questionvalidator")
+    private Questionvalidator questionvalidator;
+
     @PostMapping(value = UrlConstants.URI_QUESTION)
     @ApiOperation(value = "createQuestion", response = Object.class)
     ResponseEntity<APIResponse> createQuestion(@RequestBody QuestionForm questionForm, Principal principal) {
 
+        questionvalidator.validate(questionForm);
 
         Exam  exam = examService.findbyId(questionForm.getExamId());
         existingValidator.validateNullOrEmpty(exam,"Exam");
@@ -106,12 +115,29 @@ public class APIQuestionController extends AbtractController {
 
     @PostMapping(value = UrlConstants.URI_QUESTION + UrlConstants.URI_EXAM_ID)
     @ApiOperation(value = "createQuestionList", response = Object.class)
-    ResponseEntity<APIResponse> createQuestionList(@PathVariable("examId") Long examId,
-                                                   @RequestBody List<QuestionForm> questionForms, Principal principal) {
+    ResponseEntity<APIResponse> createQuestionList( @PathVariable("examId") Long examId, @RequestBody List<QuestionForm> questionForms ) {
+
+        questionvalidator.validate(questionForms);
+
         Exam  exam = examService.findbyId(examId);
         existingValidator.validateNullOrEmpty(exam,"Exam");
+
+        String questionCode = null;
+        Long questionGroup = null;
+
+        if (questionForms.get(0).getAutoGen() !=null && questionForms.get(0).getAutoGen() && questionForms.get(0).getNumber()  > 1  ){
+
+            questionCode  = Common.numberGenerator();
+            questionGroup = Common.numberGeneratorLong();
+        }
+
+        List<Question> saves  = new ArrayList<>();
+
         for(QuestionForm questionForm : questionForms){
+
+            // init  Question Entity
             Question question = new Question();
+            question.setCreateAt(new Date());
             question.setExplan(questionForm.getExplan());
             question.setQuestionName(questionForm.getQuestionName());
 
@@ -128,16 +154,18 @@ public class APIQuestionController extends AbtractController {
             if (CommonConstants.Difficulty.LOW.toString().equals(questionForm.getDifficulty())){
                 question.setDifficulty(CommonConstants.Difficulty.LOW);
             }
-            question.setCreateAt(new Date());
-            question  =  questionService.save(question);
+
+           // question  =  questionService.save(question);
 
             QuestionNormal questionNormal = new QuestionNormal();
+            questionNormal.setCreateAt(new Date());
             questionNormal.setQuestion(question);
             questionNormal.setAnswer1(questionForm.getAnswer1());
             questionNormal.setAnswer2(questionForm.getAnswer2());
             questionNormal.setAnswer3(questionForm.getAnswer3());
             questionNormal.setAnswer4(questionForm.getAnswer4());
 
+            // QuestionNormal Corect
             if (CommonConstants.QuestionNormalCorect.answer1.toString().equals(questionForm.getAnswerCorect())){
                 questionNormal.setAnswerCorect(CommonConstants.QuestionNormalCorect.answer1);
             }
@@ -150,18 +178,23 @@ public class APIQuestionController extends AbtractController {
             if (CommonConstants.QuestionNormalCorect.answer4.toString().equals(questionForm.getAnswerCorect())){
                 questionNormal.setAnswerCorect(CommonConstants.QuestionNormalCorect.answer4);
             }
+            //set QuestionNormal freign
+            question.setQuestionNormal(questionNormal);
+            saves.add(question); // init list on saved
 
-            questionNormal.setCreateAt(new Date());
-            questionNormal = questionNormalService.save(questionNormal);
-
-            ExamQuestion examQuestion = new ExamQuestion();
-            examQuestion.setExam(exam);
-            examQuestion.setQuestion(question);
-            examQuestion.setCreateAt(new Date());
-            examQuestion = examQuestionService.save(examQuestion);
         }
+         saves =  questionService.save(saves);
 
-        return responseUtil.successResponse("OKE");
+      /*  questionNormal.setCreateAt(new Date());
+        questionNormal = questionNormalService.save(questionNormal);
+
+        ExamQuestion examQuestion = new ExamQuestion();
+        examQuestion.setExam(exam);
+        examQuestion.setQuestion(question);
+        examQuestion.setCreateAt(new Date());
+        examQuestion = examQuestionService.save(examQuestion);*/
+
+        return responseUtil.successResponse(saves);
 
     }
 }
