@@ -24,7 +24,6 @@ public class UserController extends AbtractController {
     public ResponseEntity<APIResponse> getAll(@RequestBody User user){
 
         UserSpecification  userSpecification = new UserSpecification(0l,user.getName(),user.getPhone(),true,"thuc",0,true);
-
         Page<User> users = userService.findAll(userSpecification,  PageRequest.of(0,10));
         PagingResponseModel pagingResponseModel = new PagingResponseModel();
         pagingResponseModel.setData(users.getContent());

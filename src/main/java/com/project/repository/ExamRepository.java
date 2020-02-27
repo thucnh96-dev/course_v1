@@ -6,11 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface ExamRepository extends JpaRepository<Exam,Long>, JpaSpecificationExecutor<Exam> {
+
     List<Exam> findAllByUserAndDeleteAtIsNull(User user);
+
     Exam findByIdAndDeleteAtIsNull(Long id);
+
     Exam findByTitleIsAndDeleteAtIsNull(String title);
+
+    Exam findByStartAt(Date date);
+
 }
