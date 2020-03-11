@@ -1,4 +1,4 @@
-package com.project.Validator;
+package com.project.validator;
 
 import com.project.constants.CommonConstants;
 import com.project.form.QuestionForm;

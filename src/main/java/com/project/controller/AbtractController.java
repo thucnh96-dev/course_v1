@@ -1,6 +1,6 @@
 package com.project.controller;
 
-import com.project.Validator.ExistingValidator;
+import com.project.validator.ExistingValidator;
 import com.project.entity.User;
 import com.project.response.ResponseUtil;
 import com.project.service.UserService;

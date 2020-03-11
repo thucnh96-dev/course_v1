@@ -1,6 +1,6 @@
 package com.project.controller.API;
 
-import com.project.Validator.ExamValidator;
+import com.project.validator.ExamValidator;
 import com.project.constants.UrlConstants;
 import com.project.controller.AbtractController;
 import com.project.entity.Exam;

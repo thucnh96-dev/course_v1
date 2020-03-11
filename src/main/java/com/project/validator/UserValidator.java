@@ -1,4 +1,4 @@
-package com.project.Validator;
+package com.project.validator;
 
 import com.project.form.UserFormRegister;
 import org.springframework.beans.factory.annotation.Autowired;
